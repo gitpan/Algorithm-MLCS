@@ -9,7 +9,7 @@ require Exporter;
 
 @ISA     = qw/ Exporter /;
 @EXPORT  = qw/ lcs /;
-$VERSION = '1.0';
+$VERSION = '1.01';
 
 # Gets arrayref of sequences (arrayrefs) and return LCS array in list context
 # or length of LCS in scalar context
@@ -84,19 +84,19 @@ of multiple sequences
 
 =head1 VERSION
 
-Version 1.0
+Version 1.01
 
 =head1 SYNOPSIS
 
     use Data::Dumper;
     use Algorithm::MLCS;
 
-    my @seqs = [
+    my @seqs = (
         [ qw/a b c d f g h j q z/ ],
         [ qw/a b c d f g h j q z/ ],
         [ qw/a b c x f h j q z/   ],
         [ qw/a b c f g j q z/     ],
-    ];
+    );
 
     my @lcs = lcs( \@seqs );
     my $lcs_length = lcs( \@seqs );
