@@ -9,7 +9,7 @@ require Exporter;
 
 @ISA     = qw/ Exporter /;
 @EXPORT  = qw/ lcs /;
-$VERSION = '1.01';
+$VERSION = '1.02';
 
 # Gets arrayref of sequences (arrayrefs) and return LCS array in list context
 # or length of LCS in scalar context
@@ -49,10 +49,11 @@ sub _build_seq {
     for my $i ( 0 .. $#{$seq} ) {
         my %tok;
         for ( keys %dict ) {
+            $tok{$_} = @{$seq} - $dict{$_}[0];
             if ( $dict{$_}[0] == $i ) {
-                $tok{$_} = @{$seq} - shift @{ $dict{$_} };
+                shift @{ $dict{$_} };
                 delete $dict{$_} if !@{ $dict{$_} };
-            } else { $tok{$_} = @{$seq} - $dict{$_}[0] }
+            }
         }
         $seq_st[$i] = \%tok;
     }
@@ -84,7 +85,7 @@ of multiple sequences
 
 =head1 VERSION
 
-Version 1.01
+Version 1.02
 
 =head1 SYNOPSIS
 
